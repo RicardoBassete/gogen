@@ -122,3 +122,80 @@ func TestCompArr(t *testing.T) {
 		}
 	}
 }
+
+func TestSplitSlice(t *testing.T) {
+	{
+		intSlice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+		s1, s2 := SplitSlice(intSlice)
+		if !CompArr(s1, []int{1, 2, 3, 4, 5}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if !CompArr(s2, []int{6, 7, 8, 9, 10}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1 = append(s1, s2...)
+		if !CompArr(s1, intSlice) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1, s2 = SplitSlice(intSlice)
+		if CompArr(s1, []int{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if CompArr(s2, []int{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+	}
+
+	{
+		stringSlice := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}
+
+		s1, s2 := SplitSlice(stringSlice)
+		if !CompArr(s1, []string{"a", "b", "c", "d", "e"}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if !CompArr(s2, []string{"f", "g", "h", "i", "j"}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1 = append(s1, s2...)
+		if !CompArr(s1, stringSlice) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1, s2 = SplitSlice(stringSlice)
+		if CompArr(s1, []string{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if CompArr(s2, []string{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+	}
+
+	{
+		floatSlice := []float64{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0}
+
+		s1, s2 := SplitSlice(floatSlice)
+		if !CompArr(s1, []float64{1.0, 2.0, 3.0, 4.0, 5.0}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if !CompArr(s2, []float64{6.0, 7.0, 8.0, 9.0, 10.0}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1 = append(s1, s2...)
+		if !CompArr(s1, floatSlice) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+
+		s1, s2 = SplitSlice(floatSlice)
+		if CompArr(s1, []float64{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+		if CompArr(s2, []float64{}) {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+	}
+}

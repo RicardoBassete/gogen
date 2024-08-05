@@ -36,3 +36,14 @@ func CompArr[T comparable](arr1 []T, arr2 []T) bool {
 	}
 	return true
 }
+
+// Splits the input slice in half and returns both halves.
+// If the slice is empty returns two empty slices.
+func SplitSlice[T any](slice []T) ([]T, []T) {
+	l := len(slice)
+	if l == 0 {
+		return []T{}, []T{}
+	}
+	mid := l / 2
+	return slice[:mid], slice[mid:]
+}
