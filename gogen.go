@@ -20,3 +20,19 @@ func GetLast[T any](array []T) T {
 	}
 	return array[len(array)-1]
 }
+
+// Compares two slices and returns true if both slices are equal
+func CompArr[T comparable](arr1 []T, arr2 []T) bool {
+	if len(arr1) != len(arr2) {
+		return false
+	}
+	if len(arr1) == 0 && len(arr2) == 0 {
+		return false
+	}
+	for i, v := range arr1 {
+		if v != arr2[i] {
+			return false
+		}
+	}
+	return true
+}
