@@ -27,7 +27,7 @@ func CompArr[T comparable](arr1 []T, arr2 []T) bool {
 		return false
 	}
 	if len(arr1) == 0 && len(arr2) == 0 {
-		return false
+		return true
 	}
 	for i, v := range arr1 {
 		if v != arr2[i] {

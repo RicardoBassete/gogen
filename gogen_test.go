@@ -101,4 +101,24 @@ func TestCompArr(t *testing.T) {
 			t.Errorf("[bool] Expected %v, got: %v", true, false)
 		}
 	}
+
+	{
+		floatSlice := []float64{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0}
+		floatSlice2 := []float64{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0}
+
+		expected, got := true, CompArr(floatSlice, floatSlice2)
+		if expected == got {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+	}
+
+	{
+		floatSlice := []float64{}
+		floatSlice2 := []float64{}
+
+		expected, got := true, CompArr(floatSlice, floatSlice2)
+		if expected != got {
+			t.Errorf("[bool] Expected %v, got: %v", true, false)
+		}
+	}
 }
