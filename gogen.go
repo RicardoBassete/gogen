@@ -47,3 +47,15 @@ func SplitSlice[T any](slice []T) ([]T, []T) {
 	mid := l / 2
 	return slice[:mid], slice[mid:]
 }
+
+// Creates a copy of a slice, filtered down to just the elements from the
+// given slice that pass the test implemented by the provided function.
+func Filter[T any](slice []T, test func(T) bool) []T {
+	result := make([]T, 0)
+	for _, element := range slice {
+		if test(element) {
+			result = append(result, element)
+		}
+	}
+	return result
+}

@@ -199,3 +199,86 @@ func TestSplitSlice(t *testing.T) {
 		}
 	}
 }
+
+func TestFilter(t *testing.T) {
+	{
+		intSlice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+		expectedEvenSlice := []int{2, 4, 6, 8, 10}
+		expectedOddSlice := []int{1, 3, 5, 7, 9}
+
+		evenSlice := Filter(intSlice, func(i int) bool {
+			return i%2 == 0
+		})
+
+		oddSlice := Filter(intSlice, func(i int) bool {
+			return i%2 == 1
+		})
+
+		if !CompArr(evenSlice, expectedEvenSlice) {
+			t.Errorf("[int] Expected %v, got: %v", expectedEvenSlice, evenSlice)
+		}
+
+		if !CompArr(oddSlice, expectedOddSlice) {
+			t.Errorf("[int] Expected %v, got: %v", expectedOddSlice, oddSlice)
+		}
+	}
+	{
+		stringSlice := []string{"a", "b", "c", "a", "b", "c", "a", "b", "c"}
+		expectedSliceA := []string{"a", "a", "a"}
+		expectedSliceB := []string{"b", "b", "b"}
+		expectedSliceC := []string{"c", "c", "c"}
+
+		sliceA := Filter(stringSlice, func(i string) bool {
+			return i == "a"
+		})
+		sliceB := Filter(stringSlice, func(i string) bool {
+			return i == "b"
+		})
+		sliceC := Filter(stringSlice, func(i string) bool {
+			return i == "c"
+		})
+
+		if !CompArr(sliceA, expectedSliceA) {
+			t.Errorf("[string] Expected %v, got: %v", expectedSliceA, sliceA)
+		}
+		if !CompArr(sliceB, expectedSliceB) {
+			t.Errorf("[string] Expected %v, got: %v", expectedSliceB, sliceB)
+		}
+		if !CompArr(sliceC, expectedSliceC) {
+			t.Errorf("[string] Expected %v, got: %v", expectedSliceC, sliceC)
+		}
+	}
+	{
+		type Value struct {
+			val string
+		}
+		structSlice := []Value{
+			{val: "a"},
+			{val: "b"},
+			{val: "c"},
+			{val: "a"},
+			{val: "b"},
+			{val: "c"},
+			{val: "a"},
+			{val: "b"},
+			{val: "c"},
+		}
+
+		expectedStructSliceA := []Value{
+			{val: "a"},
+			{val: "a"},
+			{val: "a"},
+		}
+
+		structSliceA := Filter(structSlice, func(a Value) bool {
+			return a.val == "a"
+		})
+
+		for i, result := range structSliceA {
+			if result != expectedStructSliceA[i] {
+				t.Errorf("[struct] Expected %v, got: %v", expectedStructSliceA, structSliceA)
+			}
+		}
+
+	}
+}
